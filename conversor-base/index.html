@@ -9,34 +9,36 @@
   </head>
 
   <body>
-    <div class="cabecalho">
-      <h1 class="titulo">Conversor de Base</h1>
-      <h2 class="subtitulo">
-        Selecione as bases, digite o número e clique em calcular
-      </h2>
+    <div class="container">
+      <div class="cabecalho">
+        <h1 class="titulo">Conversor de Base</h1>
+        <h2 class="subtitulo">
+          Selecione as bases, digite o número e clique em calcular
+        </h2>
+      </div>
+
+      <div class="seletores">
+        <label for="base-atual">De: </label>
+        <select name="" id="base-atual" class="entrada">
+          <option value="2">Binário</option>
+          <option value="8">Octal</option>
+          <option value="16">Hexadecimal</option>
+          <option value="10">Decimal</option>
+        </select>
+        <label for="base-final">Para: </label>
+        <select name="" id="base-final" class="entrada">
+          <option value="2">Binário</option>
+          <option value="8">Octal</option>
+          <option value="16">Hexadecimal</option>
+          <option value="10">Decimal</option>
+        </select>
+      </div>
+
+      <input type="text" name="" id="numero" class="entrada" placeholder="0" />
+      <button id="botao">Converter</button>
+
+      <div id="resultado">Resultado</div>
     </div>
-
-    <div class="seletores">
-      <label for="base-atual">De: </label>
-      <select name="" id="base-atual" class="entrada">
-        <option value="2">Binário</option>
-        <option value="8">Octal</option>
-        <option value="16">Hexadecimal</option>
-        <option value="10">Decimal</option>
-      </select>
-      <label for="base-final">Para: </label>
-      <select name="" id="base-final" class="entrada">
-        <option value="2">Binário</option>
-        <option value="8">Octal</option>
-        <option value="16">Hexadecimal</option>
-        <option value="10">Decimal</option>
-      </select>
-    </div>
-
-    <input type="text" name="" id="numero" class="entrada" placeholder="0" />
-    <button id="botao">Converter</button>
-
-    <div id="resultado">Resultado</div>
 
     <script src="script.js"></script>
   </body>
