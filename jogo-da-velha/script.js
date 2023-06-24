@@ -32,12 +32,21 @@ class JogoDaVelha {
   }
 
   jogar(jogada) {
-    if (this.#jogadaValida(jogada)) {
-      this.#adicionar(jogada);
-      this.#trocarJogador();
-    } else {
-      console.log("Jogada Inválida");
+    this.#processarJogada(jogada);
+  }
+
+  #processarJogada(jogada) {
+    if (!this.#jogadaValida(jogada)) return;
+
+    this.#adicionar(jogada);
+    if (this.#conquistouVitoriaComJogada(jogada)) {
+      this.vencedor = this.jogadorAtual.simbolo;
+      return;
+    } else if (this.#finalizouComEmpate()) {
+      this.vencedor = "-";
+      return;
     }
+    this.#trocarJogador();
   }
 
   #jogadaValida(jogada) {
@@ -78,18 +87,57 @@ class JogoDaVelha {
     this.tabuleiro[linha - 1][coluna - 1] = this.jogadorAtual.simbolo;
   }
 
+  #finalizouComEmpate() {
+    let espacosVazios = this.tabuleiro.flat().filter((campo) => campo === null);
+    return espacosVazios.length === 0;
+  }
+
+  #conquistouVitoriaComJogada(jogada) {
+    let { linha, coluna } = jogada;
+    let { tabuleiro, jogadorAtual } = this;
+    let tamanho = tabuleiro.length;
+    let indices = Array(tamanho)
+      .fill(0)
+      .map((_, i) => i + 1);
+
+    let ganhouEmLinha = indices.every(
+      (i) => this.#campo(linha, i) === jogadorAtual.simbolo
+    );
+
+    let ganhouEmColuna = indices.every(
+      (i) => this.#campo(i, coluna) === jogadorAtual.simbolo
+    );
+
+    let ganhouEmDiag1 = indices.every(
+      (i) => this.#campo(i, i) === jogadorAtual.simbolo
+    );
+
+    let ganhouEmDiag2 = indices.every(
+      (i) => this.#campo(tamanho - i + 1, i) === jogadorAtual.simbolo
+    );
+
+    return ganhouEmLinha || ganhouEmColuna || ganhouEmDiag1 || ganhouEmDiag2;
+  }
+
   toString() {
     let matriz = this.tabuleiro
       .map((linha) => linha.map((posicao) => posicao ?? "-").join(" "))
       .join("\n");
-    return matriz;
+    let quemVenceu = this.vencedor ? `Vencedor: ${this.vencedor}` : "";
+
+    return `${matriz} \n ${quemVenceu}`;
   }
 }
 
 const jogo = new JogoDaVelha();
 jogo.jogar(new Jogada(1, 1));
-jogo.jogar(new Jogada(1, 2));
 jogo.jogar(new Jogada(2, 2));
+jogo.jogar(new Jogada(1, 3));
+jogo.jogar(new Jogada(1, 2));
 jogo.jogar(new Jogada(3, 1));
-jogo.jogar(new Jogada(3, 1));
+// jogo.jogar(new Jogada(2, 3));
+jogo.jogar(new Jogada(3, 2));
+// jogo.jogar(new Jogada(3, 1));
+// jogo.jogar(new Jogada(3, 3));
+// jogo.finalizouComEmpate();
 console.log(jogo.toString());
