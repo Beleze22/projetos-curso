@@ -1,0 +1,9 @@
+:root {
+  --cor-fundo: #302b63;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

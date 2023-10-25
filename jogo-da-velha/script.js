@@ -132,12 +132,12 @@ class JogoDaVelha {
 const jogo = new JogoDaVelha();
 jogo.jogar(new Jogada(1, 1));
 jogo.jogar(new Jogada(2, 2));
+jogo.jogar(new Jogada(2, 1));
+jogo.jogar(new Jogada(3, 1));
 jogo.jogar(new Jogada(1, 3));
 jogo.jogar(new Jogada(1, 2));
-jogo.jogar(new Jogada(3, 1));
-// jogo.jogar(new Jogada(2, 3));
 jogo.jogar(new Jogada(3, 2));
-// jogo.jogar(new Jogada(3, 1));
-// jogo.jogar(new Jogada(3, 3));
+jogo.jogar(new Jogada(2, 3));
+jogo.jogar(new Jogada(3, 3));
 // jogo.finalizouComEmpate();
 console.log(jogo.toString());
